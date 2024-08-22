@@ -16,6 +16,7 @@ function CarMarker({
   useEffect(() => {
     if (shouldTrackCar) {
       map.setView(position, map.getZoom());
+      //tjos 
     }
   }, [position, shouldTrackCar, map]);
 

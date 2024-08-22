@@ -122,9 +122,8 @@ function Maps() {
         fetchPathData={fetchPathData}
       />
       
-      <p>hello</p>
-      <p>hello</p>
-
+     
+      <p>design by -sumit </p>
     </MapContainer>
     
   );
