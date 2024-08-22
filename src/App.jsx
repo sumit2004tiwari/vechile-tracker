@@ -3,7 +3,7 @@ import Maps from "./component/Maps";
 function App() {
   return (
     <>
-    kjlkj
+    
       <Maps />
       <p>okay</p>
     </>
