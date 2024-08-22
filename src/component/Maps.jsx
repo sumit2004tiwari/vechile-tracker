@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap, useMapEvent } from "react-leaflet";
-import L from "leaflet";
+import { MapContainer, TileLayer, Polyline } from "react-leaflet";
+import CarMarker from "./CarMarker"; 
 import "leaflet/dist/leaflet.css";
-import car1 from "./assets/Car1.png";
-
+import car1 from "../assets/Car1.png"
 function Maps() {
   const [position, setPosition] = useState([30.704649, 76.717873]);
   const [path, setPath] = useState([]);
@@ -122,78 +121,10 @@ function Maps() {
         handleDateRangeChange={handleDateRangeChange}
         fetchPathData={fetchPathData}
       />
-      <ClickHandler />
+      
+      <p>hello</p>
     </MapContainer>
   );
-}
-
-function CarMarker({
-  position,
-  rotation,
-  car1,
-  shouldTrackCar,
-  dateRange,
-  handleDateRangeChange,
-  fetchPathData,
-}) {
-  const map = useMap();
-
-  useEffect(() => {
-    if (shouldTrackCar) {
-      map.setView(position, map.getZoom());
-    }
-  }, [position, shouldTrackCar, map]);
-
-  const handleStartMovement = () => {
-    if (dateRange) {
-      fetchPathData(dateRange);
-      map.closePopup(); // Close the popup when movement starts
-    }
-  };
-
-  return (
-    <Marker
-      position={position}
-      icon={L.divIcon({
-        className: "custom-icon",
-        html: `<img src=${car1} style="transform: rotate(${rotation}deg); width: 40px; height: 40px;" />`,
-        iconSize: [40, 40],
-        iconAnchor: [20, 20],
-      })}
-    >
-      <Popup>
-        <div>
-          <strong>Vehicle Location</strong> <br />
-          Latitude: {position[0]} <br />
-          Longitude: {position[1]} <br />
-          <strong>Status:</strong> Moving <br />
-          <strong>Speed:</strong> 20 km/h
-          <br />
-          <label htmlFor="dateRange">Select Date Range: </label>
-          <select id="dateRange" value={dateRange} onChange={handleDateRangeChange}>
-            <option value="">Select</option>
-            <option value="today">Today</option>
-            <option value="yesterday">Yesterday</option>
-            <option value="thisWeek">This Week</option>
-            <option value="previousWeek">Previous Week</option>
-            <option value="thisMonth">This Month</option>
-            <option value="nextMonth">Next Month</option>
-          </select>
-          <br />
-          <button onClick={handleStartMovement}>Start Movement</button>
-        </div>
-      </Popup>
-    </Marker>
-  );
-}
-
-function ClickHandler() {
-  useMapEvent("click", (event) => {
-    const { lat, lng } = event.latlng;
-    console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-  });
-
-  return null;
 }
 
 export default Maps;
