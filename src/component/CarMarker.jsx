@@ -12,7 +12,7 @@ function CarMarker({
   fetchPathData,
 }) {
   const map = useMap();
-
+hjjhk
   useEffect(() => {
     if (shouldTrackCar) {
       map.setView(position, map.getZoom());
